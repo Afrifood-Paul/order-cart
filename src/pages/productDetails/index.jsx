@@ -83,7 +83,7 @@ const ProductDetailsPage = () => {
               </p>
             </div>
             <div>
-              {cartItems.findIndex((item) => item.id === productDetails.id) >
+              {cartItems && cartItems.findIndex((item) => item.id === productDetails.id) >
               -1 ? (
                 <p className="py-2 text-[whitesmoke] font-light">
                   Item Is Already Added
