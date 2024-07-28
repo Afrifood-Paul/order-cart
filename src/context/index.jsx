@@ -30,7 +30,7 @@ function ShoppingCartProvider({ children }) {
 
   useEffect(() => {
     fetchProductList();
-    setCartItems(JSON.parse(localStorage.getItem("cartItems") || []));
+    setCartItems(JSON.parse(localStorage.getItem("cartItems")));
   }, []);
 
   // console.log(cartItems);
