@@ -52,7 +52,7 @@ const ProductDetailsPage = () => {
       <div className="p-6 lg:max-w-7xl max-w-4xl mx-5 g:mx-auto bg-red-700 my-10 rounded-xl">
         <div className="grid items-center grid-cols-1 lg:grid-cols-5 gap-12 shadow-sm p-6">
           <div className="lg:col-span-3 w-full lg:sticky top-0 text-center">
-            <div className="px-4 py-10 rounded-2xl shadow-lg shadow-black">
+            <div className="px-4 py-10 rounded-2xl bg-[whitesmoke] shadow-lg shadow-black">
               <img
                 className="w-1/2 rounded object-cover"
                 src={productDetails.thumbnail}
@@ -62,7 +62,7 @@ const ProductDetailsPage = () => {
             <div className="mt-6 flex flex-wrap justify-center gap-6 mx-auto">
               {productDetails?.images
                 ? productDetails.images.map((imageItem) => (
-                    <div className="rounded-xl p-4 shadow-md" key={imageItem}>
+                    <div className="rounded-xl p-4 shadow-md " key={imageItem}>
                       <img
                         src={imageItem}
                         className="w-24 cursor-pointer"

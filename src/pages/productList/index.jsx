@@ -31,7 +31,7 @@ const ProductListPage = () => {
               <ProductTitle singleProductTitle={singleProductTitle} />
             ))
           ) : (
-            <h2>No Products Found </h2>
+            <h2 className="text-white font-bold">No Products Found </h2>
           )}
         </div>
       </div>
