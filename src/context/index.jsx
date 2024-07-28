@@ -39,6 +39,14 @@ function ShoppingCartProvider({ children }) {
     console.log(getProductDetails);
 
     const cpyExistingCartItems = [...cartItems];
+
+    // if (!Array.isArray(cartItems)) {
+    //   console.log("u is not iterable");
+    //   return;
+    // }
+
+    // console.log("cart", cartItems);
+
     const findIndexOfCurrentItem = cpyExistingCartItems.findIndex(
       (cartItem) => cartItem.id === getProductDetails.id
     );

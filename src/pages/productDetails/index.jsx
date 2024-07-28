@@ -52,7 +52,7 @@ const ProductDetailsPage = () => {
       <div className="p-6 lg:max-w-7xl max-w-4xl mx-5 g:mx-auto bg-red-700 my-10 rounded-xl">
         <div className="grid items-center grid-cols-1 lg:grid-cols-5 gap-12 shadow-sm p-6">
           <div className="lg:col-span-3 w-full lg:sticky top-0 text-center">
-            <div className="px-4 py-10 rounded-xl shadow-lg">
+            <div className="px-4 py-10 rounded-2xl shadow-lg shadow-black">
               <img
                 className="w-1/2 rounded object-cover"
                 src={productDetails.thumbnail}
@@ -83,23 +83,28 @@ const ProductDetailsPage = () => {
               </p>
             </div>
             <div>
-              {cartItems && cartItems.findIndex((item) => item.id === productDetails.id) >
-              -1 ? (
+              {cartItems &&
+              cartItems.findIndex((item) => item.id === productDetails.id) >
+                -1 ? (
                 <p className="py-2 text-[whitesmoke] font-light">
                   Item Is Already Added
                 </p>
               ) : null}
               <button
                 disabled={
-                 (cartItems && cartItems.findIndex((item) => item.id === productDetails.id) >
-                  -1)
+                  cartItems &&
+                  cartItems.findIndex((item) => item.id === productDetails.id) >
+                    -1
                 }
                 onClick={() => handleAddToCart(productDetails)}
-                className="disabled:opacity-65 min-w-[200px] mt-5 px-4 py-3 border border-[#333] mx-2 bg-transparent text-sm font-semibold rounded duration-500 hover:bg-slate-900 hover:text-white"
+                className="disabled:opacity-65 min-w-[200px] mt-5 px-4 py-3 border border-[#333] mx-2 bg-white text-sm font-semibold rounded duration-500 hover:bg-slate-900 hover:text-white"
               >
                 Add to Cart
               </button>
-              <button onClick={() => navigate('/product-list')} className="min-w-[200px] mt-5 px-4 py-3 border border-[#333] bg-transparent text-sm font-semibold rounded duration-500 hover:bg-slate-900 hover:text-white">
+              <button
+                onClick={() => navigate("/product-list")}
+                className="min-w-[200px] mt-5 px-4 py-3 border border-[#333] bg-white text-sm font-semibold rounded duration-500 hover:bg-slate-900 hover:text-white"
+              >
                 BackToProductList
               </button>
             </div>
