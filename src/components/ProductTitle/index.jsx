@@ -41,7 +41,7 @@ const ProductTitle = ({ singleProductTitle }) => {
       </button>
       <button
         disabled={
-          cartItems.findIndex((item) => item.id === singleProductTitle.id) > -1
+          (cartItems && cartItems.findIndex((item) => item.id === singleProductTitle.id) > -1)
         }
         onClick={() => handleAddToCart(singleProductTitle)}
         className="disabled:opacity-65 px-5 mt-5 w-full py-2 rounded-none bg-black text-white font-bold text-lg"
