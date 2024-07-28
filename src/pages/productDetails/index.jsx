@@ -91,8 +91,8 @@ const ProductDetailsPage = () => {
               ) : null}
               <button
                 disabled={
-                  cartItems.findIndex((item) => item.id === productDetails.id) >
-                  -1
+                 (cartItems && cartItems.findIndex((item) => item.id === productDetails.id) >
+                  -1)
                 }
                 onClick={() => handleAddToCart(productDetails)}
                 className="disabled:opacity-65 min-w-[200px] mt-5 px-4 py-3 border border-[#333] mx-2 bg-transparent text-sm font-semibold rounded duration-500 hover:bg-slate-900 hover:text-white"
