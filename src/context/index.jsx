@@ -77,13 +77,14 @@ function ShoppingCartProvider({ children }) {
   //   navigate("/cart");
   // }
   function handleAddToCart(getProductDetails) {
-    console.log(getProductDetails);
+    // console.log(getProductDetails);
 
     // Ensure cartItems is defined and is an array
     if (!Array.isArray(cartItems)) {
       console.error("cartItems is not an array");
       return;
     }
+    console.log(cartItems);
 
     // Ensure getProductDetails is defined and has the necessary properties
     if (
@@ -95,7 +96,7 @@ function ShoppingCartProvider({ children }) {
       return;
     }
 
-    console.log(cartItems);
+    
 
     const cpyExistingCartItems = [...cartItems];
 
@@ -103,7 +104,7 @@ function ShoppingCartProvider({ children }) {
       (cartItem) => cartItem.id === getProductDetails.id
     );
 
-    console.log(findIndexOfCurrentItem);
+    // console.log(findIndexOfCurrentItem);
     if (findIndexOfCurrentItem === -1) {
       cpyExistingCartItems.push({
         ...getProductDetails,
@@ -119,7 +120,7 @@ function ShoppingCartProvider({ children }) {
       };
     }
 
-    console.log(cpyExistingCartItems, "cpyExistingCartItems");
+    // console.log(cpyExistingCartItems, "cpyExistingCartItems");
     setCartItems(cpyExistingCartItems);
     localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
     navigate("/cart");
