@@ -12,7 +12,7 @@ function ShoppingCartProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [productList, setProductList] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState({});
   const navigate = useNavigate();
 
   async function fetchProductList() {
