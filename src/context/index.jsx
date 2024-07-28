@@ -12,10 +12,7 @@ function ShoppingCartProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [productList, setProductList] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCartItems = localStorage.getItem("cartItems");
-    return savedCartItems ? JSON.parse(savedCartItems) : [];
-  });
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
   async function fetchProductList() {
@@ -39,25 +36,25 @@ function ShoppingCartProvider({ children }) {
   // console.log(cartItems);
 
   function handleAddToCart(getProductDetails) {
-    console.log(getProductDetails);
+    // console.log(getProductDetails);
+  //   console.log('Product Details:', getProductDetails);
+  // console.log('Current cartItems:', cartItems, Array.isArray(cartItems));
 
     //To Ensure cartItems is an array
     if (!Array.isArray(cartItems)) {
-      console.error("cartItems is not an array");
+      console.log("cartItems is not an array");
       return;
-    }
+    };
 
-    console.log(cartItems);
+    // console.log(cartItems);
 
     const cpyExistingCartItems = [...cartItems];
-
-    // console.log("cart", cartItems);
 
     const findIndexOfCurrentItem = cpyExistingCartItems.findIndex(
       (cartItem) => cartItem.id === getProductDetails.id
     );
 
-    console.log(findIndexOfCurrentItem);
+    // console.log(findIndexOfCurrentItem);
     if (findIndexOfCurrentItem === -1) {
       cpyExistingCartItems.push({
         ...getProductDetails,
@@ -74,8 +71,9 @@ function ShoppingCartProvider({ children }) {
           cpyExistingCartItems[findIndexOfCurrentItem].price,
       };
     }
-    console.log(cpyExistingCartItems, "cpyExistingCartItems");
+    // console.log(cpyExistingCartItems, "cpyExistingCartItems");
     setCartItems(cpyExistingCartItems);
+  
     localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
     navigate("/cart");
   };
@@ -83,7 +81,7 @@ function ShoppingCartProvider({ children }) {
   function handleRemoveFromCart(getProductDetails, isFullyRemoveFromCart) {
     // Ensure cartItems is an array
     if (!Array.isArray(cartItems)) {
-      console.error("cartItems is not an array");
+      console.log("cartItems is not an array");
       return;
     }
 
@@ -106,7 +104,7 @@ function ShoppingCartProvider({ children }) {
 
     localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
     setCartItems(cpyExistingCartItems);
-  }
+  };
 
   return (
     <ShoppingCartContext.Provider

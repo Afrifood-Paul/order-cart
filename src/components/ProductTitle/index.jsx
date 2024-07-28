@@ -4,6 +4,7 @@ import { ShoppingCartContext } from "../../context";
 
 const ProductTitle = ({ singleProductTitle }) => {
   const { handleAddToCart, cartItems } = useContext(ShoppingCartContext);
+  console.log(cartItems, Array.isArray(cartItems));
 
   const navigate = useNavigate();
 
