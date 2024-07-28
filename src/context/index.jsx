@@ -35,17 +35,69 @@ function ShoppingCartProvider({ children }) {
 
   // console.log(cartItems);
 
+  // function handleAddToCart(getProductDetails) {
+  //   console.log(getProductDetails);
+
+  //   //To Ensure cartItems is an array
+  //   if (!Array.isArray(cartItems)) {
+  //     console.error("cartItems is not an array");
+  //     return;
+  //   }
+
+  //   console.log(cartItems)
+
+  //   const cpyExistingCartItems = [...cartItems];
+
+  //   // console.log("cart", cartItems);
+
+  //   const findIndexOfCurrentItem = cpyExistingCartItems.findIndex(
+  //     (cartItem) => cartItem.id === getProductDetails.id
+  //   );
+
+  //   console.log(findIndexOfCurrentItem);
+  //   if (findIndexOfCurrentItem === -1) {
+  //     cpyExistingCartItems.push({
+  //       ...getProductDetails,
+  //       quantity: 1,
+  //       totalPrice: getProductDetails.price,
+  //     });
+  //   } else {
+  //     // console.log("it is coming again");
+  //     cpyExistingCartItems[findIndexOfCurrentItem] = {
+  //       ...cpyExistingCartItems[findIndexOfCurrentItem],
+  //       quantity: cpyExistingCartItems[findIndexOfCurrentItem].quantity + 1,
+  //       totalPrice:
+  //         (cpyExistingCartItems[findIndexOfCurrentItem].quantity + 1) *
+  //         cpyExistingCartItems[findIndexOfCurrentItem].price,
+  //     };
+  //   }
+  //   console.log(cpyExistingCartItems, "cpyExistingCartItems");
+  //   setCartItems(cpyExistingCartItems);
+  //   localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
+  //   navigate("/cart");
+  // }
   function handleAddToCart(getProductDetails) {
     console.log(getProductDetails);
 
+    // Ensure cartItems is defined and is an array
+    if (!Array.isArray(cartItems)) {
+      console.error("cartItems is not an array");
+      return;
+    }
+
+    // Ensure getProductDetails is defined and has the necessary properties
+    if (
+      !getProductDetails ||
+      !getProductDetails.id ||
+      !getProductDetails.price
+    ) {
+      console.error("Invalid product details");
+      return;
+    }
+
+    console.log(cartItems);
+
     const cpyExistingCartItems = [...cartItems];
-
-    // if (!Array.isArray(cartItems)) {
-    //   console.log("u is not iterable");
-    //   return;
-    // }
-
-    // console.log("cart", cartItems);
 
     const findIndexOfCurrentItem = cpyExistingCartItems.findIndex(
       (cartItem) => cartItem.id === getProductDetails.id
@@ -59,15 +111,14 @@ function ShoppingCartProvider({ children }) {
         totalPrice: getProductDetails.price,
       });
     } else {
-      // console.log("it is coming again");
+      const currentItem = cpyExistingCartItems[findIndexOfCurrentItem];
       cpyExistingCartItems[findIndexOfCurrentItem] = {
-        ...cpyExistingCartItems[findIndexOfCurrentItem],
-        quantity: cpyExistingCartItems[findIndexOfCurrentItem].quantity + 1,
-        totalPrice:
-          (cpyExistingCartItems[findIndexOfCurrentItem].quantity + 1) *
-          cpyExistingCartItems[findIndexOfCurrentItem].price,
+        ...currentItem,
+        quantity: currentItem.quantity + 1,
+        totalPrice: (currentItem.quantity + 1) * currentItem.price,
       };
     }
+
     console.log(cpyExistingCartItems, "cpyExistingCartItems");
     setCartItems(cpyExistingCartItems);
     localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
@@ -75,6 +126,12 @@ function ShoppingCartProvider({ children }) {
   }
 
   function handleRemoveFromCart(getProductDetails, isFullyRemoveFromCart) {
+    // Ensure cartItems is an array
+    if (!Array.isArray(cartItems)) {
+      console.error("cartItems is not an array");
+      return;
+    }
+
     const cpyExistingCartItems = [...cartItems];
     const findIndexOfCurrentItem = cpyExistingCartItems.findIndex(
       (item) => item.id === getProductDetails.id
