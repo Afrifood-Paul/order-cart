@@ -12,7 +12,10 @@ function ShoppingCartProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [productList, setProductList] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCartItems = localStorage.getItem("cartItems");
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
+  });
   const navigate = useNavigate();
 
   async function fetchProductList() {
@@ -75,54 +78,7 @@ function ShoppingCartProvider({ children }) {
     setCartItems(cpyExistingCartItems);
     localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
     navigate("/cart");
-  }
-  // function handleAddToCart(getProductDetails) {
-  //   // console.log(getProductDetails);
-
-  //   // Ensure cartItems is defined and is an array
-  //   if (!Array.isArray(cartItems)) {
-  //     console.error("cartItems is not an array");
-  //     return;
-  //   }
-  //   console.log(cartItems);
-
-  //   // Ensure getProductDetails is defined and has the necessary properties
-  //   if (
-  //     !getProductDetails ||
-  //     !getProductDetails.id ||
-  //     !getProductDetails.price
-  //   ) {
-  //     console.error("Invalid product details");
-  //     return;
-  //   }
-
-  //   const cpyExistingCartItems = [...cartItems];
-
-  //   const findIndexOfCurrentItem = cpyExistingCartItems.findIndex(
-  //     (cartItem) => cartItem.id === getProductDetails.id
-  //   );
-
-  //   // console.log(findIndexOfCurrentItem);
-  //   if (findIndexOfCurrentItem === -1) {
-  //     cpyExistingCartItems.push({
-  //       ...getProductDetails,
-  //       quantity: 1,
-  //       totalPrice: getProductDetails.price,
-  //     });
-  //   } else {
-  //     const currentItem = cpyExistingCartItems[findIndexOfCurrentItem];
-  //     cpyExistingCartItems[findIndexOfCurrentItem] = {
-  //       ...currentItem,
-  //       quantity: currentItem.quantity + 1,
-  //       totalPrice: (currentItem.quantity + 1) * currentItem.price,
-  //     };
-  //   }
-
-  //   // console.log(cpyExistingCartItems, "cpyExistingCartItems");
-  //   setCartItems(cpyExistingCartItems);
-  //   localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
-  //   navigate("/cart");
-  // }
+  };
 
   function handleRemoveFromCart(getProductDetails, isFullyRemoveFromCart) {
     // Ensure cartItems is an array
