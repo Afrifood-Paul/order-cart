@@ -82,7 +82,7 @@ function ShoppingCartProvider({ children }) {
     //   "Saved cartItems to localStorage:",
     //   localStorage.getItem("cartItems")
     // );
-    navigate("/cart");
+    // navigate("/cart");
   };
 
   function handleRemoveFromCart(getProductDetails, isFullyRemoveFromCart) {

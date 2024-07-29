@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { ShoppingCartContext } from "../../context";
 import ProductTitle from "../../components/ProductTitle";
+import { useNavigate } from "react-router-dom";
 
 const ProductListPage = () => {
-  const { productList, loading } = useContext(ShoppingCartContext);
+  const { productList, loading, cartItems } = useContext(ShoppingCartContext);
+  const navigate = useNavigate();
 
   // console.log(productList);
 
@@ -22,10 +24,13 @@ const ProductListPage = () => {
   return (
     <section className="bg-white">
       <div className="w-full h-[30vh] bg-red-800">
-        <div className="max-w-md mx-auto text-center py-20">
+        <div className="max-w-md mx-auto text-center py-20 flex flex-col gap-4">
           <h2 className="text-4xl font-extrabold  text-white">
             Our Features Products
           </h2>
+          <p1 onClick={() => navigate("/cart")} className="text-white">
+            QuantityAddedToCart : {cartItems.length}
+          </p1>
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-5 mt-10 lg:mt-16 lg:gap-8 lg:grid-cols-4">

@@ -4,13 +4,13 @@ import { ShoppingCartContext } from "../../context";
 
 const ProductTitle = ({ singleProductTitle }) => {
   const { handleAddToCart, cartItems } = useContext(ShoppingCartContext);
-  console.log(cartItems, Array.isArray(cartItems));
+  // console.log(cartItems, Array.isArray(cartItems));
 
   const navigate = useNavigate();
 
   function handleNavigateDetalsPage(getCurrentIdDetails) {
     navigate(`/product-details/${getCurrentIdDetails}`);
-  }
+  };
 
   return (
     <div className="relative group border-4 border-white p-6 cursor-pointer ">
