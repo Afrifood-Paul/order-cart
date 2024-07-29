@@ -83,7 +83,7 @@ function ShoppingCartProvider({ children }) {
     //   localStorage.getItem("cartItems")
     // );
     // navigate("/cart");
-  };
+  }
 
   function handleRemoveFromCart(getProductDetails, isFullyRemoveFromCart) {
     if (!Array.isArray(cartItems)) {
@@ -96,16 +96,36 @@ function ShoppingCartProvider({ children }) {
       (item) => item.id === getProductDetails.id
     );
 
+    // if (isFullyRemoveFromCart) {
+    //   cpyExistingCartItems.splice(findIndexOfCurrentItem, 1);
+    // } else {
+    //   cpyExistingCartItems[findIndexOfCurrentItem] = {
+    //     ...cpyExistingCartItems[findIndexOfCurrentItem],
+    //     quantity: cpyExistingCartItems[findIndexOfCurrentItem].quantity - 1,
+    //     totalPrice:
+    //       (cpyExistingCartItems[findIndexOfCurrentItem].quantity - 1) *
+    //       cpyExistingCartItems[findIndexOfCurrentItem].price,
+    //   };
+
     if (isFullyRemoveFromCart) {
+      // Remove the item from the cart
       cpyExistingCartItems.splice(findIndexOfCurrentItem, 1);
     } else {
-      cpyExistingCartItems[findIndexOfCurrentItem] = {
-        ...cpyExistingCartItems[findIndexOfCurrentItem],
-        quantity: cpyExistingCartItems[findIndexOfCurrentItem].quantity - 1,
-        totalPrice:
-          (cpyExistingCartItems[findIndexOfCurrentItem].quantity - 1) *
-          cpyExistingCartItems[findIndexOfCurrentItem].price,
-      };
+      // Update the quantity and total price of the item
+      const currentItem = cpyExistingCartItems[findIndexOfCurrentItem];
+      const newQuantity = currentItem.quantity - 1;
+      const newQuantityStopDecrease = currentItem.quantity;
+
+      if (newQuantity > 0) {
+        cpyExistingCartItems[findIndexOfCurrentItem] = {
+          ...currentItem,
+          quantity: newQuantity,
+          totalPrice: newQuantity * currentItem.price,
+        };
+      } else {
+        // If the new quantity is zero, stop decreasing the item from the cart
+        newQuantityStopDecrease;
+      }
     }
 
     localStorage.setItem("cartItems", JSON.stringify(cpyExistingCartItems));
